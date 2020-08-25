@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/newsHomeFragment"
+    android:id="@+id/dashborad_nav"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/newsHomeFragment"
+        android:name="com.kotlinmvvm.ui.dashboard.news.LatestNewsFragment"
+        android:label="@string/home_dashboard"
+        tools:layout="@layout/fragment_lates_news"/>
+
+</navigation>
