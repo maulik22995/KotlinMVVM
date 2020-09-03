@@ -1,20 +1,12 @@
-/*
- * *
- *  * Created by Kevin Gitonga on 5/7/20 10:34 AM
- *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 5/7/20 10:34 AM
- *
- */
-
-package ke.co.ipandasoft.newsfeed.data.remote.responses
+package com.kotlinmvvm.model
 
 
 import com.google.gson.annotations.SerializedName
-import ke.co.ipandasoft.newsfeed.models.Article
+import com.kotlinmvvm.model.Article
 
 data class NewsResponse(
     @SerializedName("articles")
-    var articles: List<Article>?,
+    var articles: ArrayList<Article>?,
     @SerializedName("status")
     var status: String?,
     @SerializedName("totalResults")

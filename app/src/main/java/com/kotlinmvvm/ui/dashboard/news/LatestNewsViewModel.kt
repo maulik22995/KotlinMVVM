@@ -5,25 +5,45 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.kotlinmvvm.base.BaseViewModel
-import ke.co.ipandasoft.newsfeed.data.remote.responses.ResultWrapper
-import ke.co.ipandasoft.newsfeed.models.Article
+import com.kotlinmvvm.model.ResultWrapper
+import com.kotlinmvvm.model.Article
+import com.kotlinmvvm.utils.extension.initWith
 import kotlinx.coroutines.launch
 
-class LatestNewsViewModel(private val repository : LatestNewsRepo) : BaseViewModel() {
+class LatestNewsViewModel(private val repository: LatestNewsRepo) : BaseViewModel() {
 
-    private val recentNewsMutableData: MutableLiveData<List<Article>> = MutableLiveData()
-    val recentNewsLiveData: LiveData<List<Article>>
+    private val recentNewsMutableData: MutableLiveData<ArrayList<Article>> = MutableLiveData()
+    val isLoading = MutableLiveData<Boolean>().initWith(false)
+    val isSwipeRefLoading = MutableLiveData<Boolean>().initWith(false)
+    val isLast = MutableLiveData<Boolean>().initWith(false)
+    val recentNewsLiveData: LiveData<ArrayList<Article>>
         get() = recentNewsMutableData
+    var pageNo: Int = 1
 
-    fun getLocalizedNews(countryCode: String){
+    fun getLocalizedNews(countryCode: String) {
         viewModelScope.launch {
-            when(val resultResponse =repository.getNewsHeadLines(countryCode)) {
-                is ResultWrapper.Success ->{
-                    val latestNews=resultResponse.data
-                    recentNewsMutableData.postValue(latestNews.articles)
+            isSwipeRefLoading.value?.let {
+                if (pageNo == 1 && !it) {
+                    isLoading.value = true
                 }
-                is ResultWrapper.Error->{
-                    Log.d(">>","Error in response ${resultResponse.exception.localizedMessage}")
+            }
+            when (val resultResponse = repository.getNewsHeadLines(countryCode, pageNo)) {
+                is ResultWrapper.Success -> {
+                    val latestNews = resultResponse.data
+                    recentNewsMutableData.postValue(latestNews.articles)
+                    pageNo++
+                    val totalPage = ((latestNews.totalResults)?.div(20) ?: 5) + 2
+                    isLoading.value = false
+                    isLast.value = pageNo == totalPage
+                }
+                is ResultWrapper.Loading -> {
+                    isLoading.value = true
+                    isSwipeRefLoading.value = false
+                }
+                is ResultWrapper.Error -> {
+                    Log.d(">>", "Error in response ${resultResponse.exception.localizedMessage}")
+                    isLoading.value = false
+                    isSwipeRefLoading.value = false
                 }
             }
         }

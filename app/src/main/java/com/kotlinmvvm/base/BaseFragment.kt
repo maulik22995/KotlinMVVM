@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.kotlinmvvm.BR
 
 abstract class BaseFragment<BINDING : ViewDataBinding, VIEWMODEL : BaseViewModel>(
     @LayoutRes val layoutId: Int
@@ -25,7 +26,7 @@ abstract class BaseFragment<BINDING : ViewDataBinding, VIEWMODEL : BaseViewModel
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return initializeDataBinding(inflater, container).root
     }
 
     private fun initializeDataBinding(
@@ -40,7 +41,7 @@ abstract class BaseFragment<BINDING : ViewDataBinding, VIEWMODEL : BaseViewModel
         ).apply {
             binding = this
             lifecycleOwner = this@BaseFragment
-//            setVariable(BR.viewModel, viewModel)
+            setVariable(BR.viewModel, viewModel)
 //            setVariable(BR.state, state)
             executePendingBindings()
         }

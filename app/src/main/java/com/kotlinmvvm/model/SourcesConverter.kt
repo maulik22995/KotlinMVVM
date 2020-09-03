@@ -1,17 +1,9 @@
-/*
- * *
- *  * Created by Kevin Gitonga on 5/12/20 4:27 PM
- *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 5/12/20 4:27 PM
- *
- */
-
-package ke.co.ipandasoft.newsfeed.models
+package com.kotlinmvvm.model
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ke.co.ipandasoft.newsfeed.data.remote.responses.Source
+import com.kotlinmvvm.model.Source
 import java.lang.reflect.Type
 
 class SourcesConverter{

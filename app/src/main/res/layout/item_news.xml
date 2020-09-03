@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="5dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="dataModel"
+            type="com.kotlinmvvm.model.Article"/>
+    </data>
+
+<androidx.cardview.widget.CardView
+    app:cardElevation="7dp"
+    app:cardCornerRadius="3dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/root"
+        android:paddingStart="2dp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:background="@drawable/press_effect_white_bg">
+
+        <ImageView
+            coverImage="@{dataModel.urlToImage}"
+            android:id="@+id/img_cover"
+            android:layout_width="100dp"
+            android:layout_height="84dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/rcom_default"
+            android:scaleType="centerCrop"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+          />
+
+        <TextView
+            android:text="@{dataModel.title}"
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_cover"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="China reports first coronavirus case in Wuhan since April 3 among 14 new infections - Reuters" />
+
+
+        <TextView
+            android:text="@{dataModel.publishedAt}"
+            android:id="@+id/tv_publisher_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toEndOf="@id/img_cover"
+            tools:text="2020-05-10T08:19:09Z" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+</layout>
+
+

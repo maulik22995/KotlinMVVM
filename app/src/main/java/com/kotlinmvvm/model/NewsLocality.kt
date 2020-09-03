@@ -1,12 +1,4 @@
-/*
- * *
- *  * Created by Kevin Gitonga on 5/8/20 10:59 AM
- *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 5/8/20 10:59 AM
- *
- */
-
-package ke.co.ipandasoft.newsfeed.models
+package com.kotlinmvvm.model
 
 
 import androidx.room.Entity

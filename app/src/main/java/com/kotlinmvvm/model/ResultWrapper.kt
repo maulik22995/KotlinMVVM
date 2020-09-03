@@ -1,12 +1,4 @@
-/*
- * *
- *  * Created by Kevin Gitonga on 5/7/20 10:30 AM
- *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 5/7/20 10:30 AM
- *
- */
-
-package ke.co.ipandasoft.newsfeed.data.remote.responses
+package com.kotlinmvvm.model
 
 
 sealed class ResultWrapper<out T : Any> {

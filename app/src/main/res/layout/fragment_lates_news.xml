@@ -7,6 +7,7 @@
             name="viewModel"
             type="com.kotlinmvvm.ui.dashboard.news.LatestNewsViewModel" />
 
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,20 +17,30 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mReyData"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/recycler_background"
-            android:clipToPadding="false"
-            android:paddingBottom="@dimen/_10sdp" />
+            android:id="@+id/swipeRef"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mReyData"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/recycler_background"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_news" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:progressTint="@color/colorAccent"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

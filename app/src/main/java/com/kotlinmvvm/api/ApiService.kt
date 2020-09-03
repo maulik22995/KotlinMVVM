@@ -1,7 +1,7 @@
 package com.kotlinmvvm.api
 
-import ke.co.ipandasoft.newsfeed.data.remote.responses.NewsResponse
-import ke.co.ipandasoft.newsfeed.models.NewsLocality
+import com.kotlinmvvm.model.NewsResponse
+import com.kotlinmvvm.model.NewsLocality
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -10,7 +10,9 @@ import retrofit2.http.Url
 interface ApiService {
 
     @GET("/v2/top-headlines")
-    suspend fun loadHeadlines(@Query("country") countryCode:String): Response<NewsResponse>
+//    suspend fun loadHeadlines(@Query("country") countryCode:String): Response<NewsResponse>
+    suspend fun loadHeadlines(@Query("country") countryCode:String,@Query("page")
+    pageNumber: Int = 1): Response<NewsResponse>
 
     @GET("/v2/top-headlines")
     suspend fun loadCategoryHeadlines(@Query("country") countryCode:String, @Query("category") category:String): Response<NewsResponse>

@@ -3,15 +3,15 @@ package com.kotlinmvvm.ui.dashboard.news
 import android.util.Log
 import com.google.gson.Gson
 import com.kotlinmvvm.base.BaseRepository
-import ke.co.ipandasoft.newsfeed.data.remote.responses.NewsResponse
-import ke.co.ipandasoft.newsfeed.data.remote.responses.ResultWrapper
+import com.kotlinmvvm.model.NewsResponse
+import com.kotlinmvvm.model.ResultWrapper
 import java.lang.Exception
 
 class LatestNewsRepo : BaseRepository() {
 
-    suspend fun getNewsHeadLines(countryCode: String): ResultWrapper<NewsResponse> {
+    suspend fun getNewsHeadLines(countryCode: String,pageNo : Int): ResultWrapper<NewsResponse> {
         return try {
-            val dataResponse=apiService.loadHeadlines(countryCode)
+            val dataResponse=apiService.loadHeadlines(countryCode,pageNo)
             var newsResponse: NewsResponse?=null
             when {
                 dataResponse.isSuccessful -> {
